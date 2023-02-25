@@ -43,7 +43,18 @@ const JSX = (
   </div>
 );
 
-5. Two ways to create components
+5. How to define methods
+Normally methods are defined on the instance, not on the class
+
+class Person {
+  static genericHello() {
+    return 'Hello'
+  }
+}
+
+Person.genericHello() //Hello
+
+6. Two ways to create components
 
 a.
 const MyComponent = function () {
@@ -64,3 +75,35 @@ class MyComponent extends React.Component {
     </div>);
   }
 };
+
+7. Presentational vs container components
+
+a. Presentational component gets data from its props.
+const Users = props => (
+  <ul>
+    {props.users.map(user => (
+      <li>{user}</li>
+    ))}
+  </ul>
+)
+
+b. Container component manages and stores its own data
+class UsersContainer extends React.Component {
+  constructor() {
+    this.state = {
+      users: []
+    }
+  }
+  
+  componentDidMount() {
+    axios.get('/users').then(users =>
+      this.setState({ users: users }))
+    )
+  }
+  
+  render() {
+    return <Users users={this.state.users} />
+  }
+}
+
+
