@@ -2,14 +2,14 @@
 
 # How to run:
 1. switch to your branch and pull \
-`git checkout Jeff_Erickson` \
+`git checkout [your_branch]` \
 `git pull`
 
-2. node install
+2. node install \
 `cd nextjs` \
 `npm i` 
 
-3. run 
+3. run \
 `cd nextjs` \
 `npx next dev` \
 Note: please ignore the following error, as we currently do not know how to resolve it, and it doesn't interfere with any functionality:
@@ -21,5 +21,5 @@ Note: please ignore the following error, as we currently do not know how to reso
 10. how to push (create pr review) \
 `git add .` \
 `git commit -m"your commit message"` \
-`git push` \
+`git push origin [your_branch]` \
 then open github and open pr review to merge to main 
