@@ -11,6 +11,9 @@ export default function MainNavigation(props) {
           <Link href='/'>Home</Link>
         </li>
         <li>
+          <Link href='/about'>About</Link>
+        </li>
+        <li>
           <Link href='/all-meet-up'>All Meetups</Link>
         </li>
         <li>
