@@ -3,8 +3,8 @@
 # How to run:
 1. switch to your branch and fetch+merge \
 `git checkout [your_branch]` \
-`git fetch origin/master` \
-`git merge origin/master`
+`git fetch origin/main` \
+`git merge origin/main`
 
 
 2. node install \
