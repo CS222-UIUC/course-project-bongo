@@ -18,10 +18,9 @@ Note: please ignore the following error, as we currently do not know how to reso
 `[webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies` 
 
 
-
-
-10. how to push (create pr review) \
+4. how to push (create pr review) \
 `git add .` \
 `git commit -m"your commit message"` \
-`git push origin [your_branch]:main` \
+`git push` // push to your own remote branch \
+`git push origin [your_branch]:main` // push from your branch to main \
 then open github and open pr review to merge to main 
