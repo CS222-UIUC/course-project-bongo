@@ -1,0 +1,109 @@
+1. Create JSX
+
+const JSX = (<div>
+    <h1></h1>
+    <p>
+
+    </p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>);
+
+
+2. Add comment
+
+const JSX = (
+  <div>
+    <h1>This is a block of JSX</h1>
+    <p>Here's a subtitle</p>
+  {/*This is comment*/}
+  </div>
+);
+
+
+3. Update/Render DOM tree
+
+const JSX = (
+  <div>
+    <h1>Hello World</h1>
+    <p>Render this to the DOM</p>
+  </div>
+);
+
+ReactDOM.render(JSX,document.getElementById("challenge-node"))
+
+4. Define a class
+
+const JSX = (
+  <div className="myDiv">
+    <h1 >Add a class here div</h1>
+  </div>
+);
+
+5. How to define methods
+Normally methods are defined on the instance, not on the class
+
+class Person {
+  static genericHello() {
+    return 'Hello'
+  }
+}
+
+Person.genericHello() //Hello
+
+6. Two ways to create components
+
+a.
+const MyComponent = function () {
+  const JSX = (<div>
+    <h1>Hello React!</h1>
+      </div>);
+  return JSX
+}
+
+b.
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (<div>
+    <h1>Hello React!</h1>
+    </div>);
+  }
+};
+
+7. Presentational vs container components
+
+a. Presentational component gets data from its props.
+const Users = props => (
+  <ul>
+    {props.users.map(user => (
+      <li>{user}</li>
+    ))}
+  </ul>
+)
+
+b. Container component manages and stores its own data
+class UsersContainer extends React.Component {
+  constructor() {
+    this.state = {
+      users: []
+    }
+  }
+  
+  componentDidMount() {
+    axios.get('/users').then(users =>
+      this.setState({ users: users }))
+    )
+  }
+  
+  render() {
+    return <Users users={this.state.users} />
+  }
+}
+
+
