@@ -19,6 +19,16 @@ const DUMMY_DATA = [
     description:
       'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
   },
+
+  {
+    id: 'm2',
+    title: 'This is a third meetup',
+    image:
+      'https://i.kym-cdn.com/entries/icons/original/000/038/205/8679305.jpg',
+    address: 'Oh no!',
+    description:
+      'cringe',
+  },
 ];
 
 

@@ -19,6 +19,9 @@ export default function MainNavigation(props) {
         <li>
           <Link href='/favorites'>My Favorites</Link>
         </li>
+        <li>
+          <Link href='/CS-222'>CS 222</Link>
+        </li>
       </ul>
     </nav>
   </header>
