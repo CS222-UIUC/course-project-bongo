@@ -3,7 +3,7 @@
 # How to run:
 1. switch to your branch and fetch+merge \
 `git checkout [your_branch]` \
-`git fetch origin/master`
+`git fetch origin/master` \
 `git merge origin/master`
 
 
@@ -23,5 +23,5 @@ Note: please ignore the following error, as we currently do not know how to reso
 10. how to push (create pr review) \
 `git add .` \
 `git commit -m"your commit message"` \
-`git push origin [your_branch]` \
+`git push origin [your_branch]:main` \
 then open github and open pr review to merge to main 
