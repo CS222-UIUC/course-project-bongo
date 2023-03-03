@@ -3,7 +3,7 @@
 # How to run:
 1. switch to your branch and fetch+merge \
 `git checkout [your_branch]` \
-`git fetch origin/main` \
+`git fetch origin` \
 `git merge origin/main`
 
 
