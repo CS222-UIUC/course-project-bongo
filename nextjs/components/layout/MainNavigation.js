@@ -16,6 +16,9 @@ export default function MainNavigation(props) {
         <li>
           <Link href='/new-meetup'>Settings</Link>
         </li>
+        <li>
+          <Link href='/CS-222'>CS 222</Link>
+        </li>
       </ul>
     </nav>
   </header>
