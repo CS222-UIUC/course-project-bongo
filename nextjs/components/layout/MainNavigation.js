@@ -4,23 +4,17 @@ import Link from 'next/link'
 export default function MainNavigation(props) {
   return (
     <header className={styles.header}>
-    <div className={styles.logo}>React Meetups</div>
+    <div href='/' className={styles.logo}>Liquid Productivity</div>
     <nav>
       <ul>
         <li>
-          <Link href='/'>Home</Link>
+          <Link href='/'>Timer</Link>
         </li>
         <li>
-          <Link href='/about'>About</Link>
+          <Link href='/all-meet-up'>Visualization</Link>
         </li>
         <li>
-          <Link href='/all-meet-up'>All Meetups</Link>
-        </li>
-        <li>
-          <Link href='/new-meetup'>Add New Meetup</Link>
-        </li>
-        <li>
-          <Link href='/favorites'>My Favorites</Link>
+          <Link href='/new-meetup'>Settings</Link>
         </li>
         <li>
           <Link href='/CS-222'>CS 222</Link>

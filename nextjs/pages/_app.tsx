@@ -18,7 +18,16 @@ import Script from "next/script";
 import MainNavigation from '@components/layout/MainNavigation'
 import Layout from '@components/layout/Layout'
 
+// add bootstrap css 
+// import "bootstrap/dist/css/bootstrap.min.css";
+
+
+
+
+
 export default function App({ Component, pageProps }: AppProps) {
+
+  
   return (
     <div>
       {/* for custom imports and the remaining of bootstrap */}
