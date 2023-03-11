@@ -19,12 +19,22 @@ export default function Stopwatch(props) {
     clearInterval(intervalRef.current);
   };
 
-  let timePassed = (time - now) / 1000;
+  let timePassed = Math.trunc((time - now) / 1000);
+
+  let timePassed_min = Math.trunc(timePassed / 60).toLocaleString('en-US', {
+    minimumIntegerDigits: 2,
+    useGrouping: false
+  });
+  
+  let timePassed_sec = (timePassed - 60*timePassed_min).toLocaleString('en-US', {
+    minimumIntegerDigits: 2,
+    useGrouping: false
+  });
 
   return (
     <div className='Stopwatch'>
-      <h1>Start recording time</h1>
-      <h2>{timePassed.toFixed(1)}</h2>
+      <h1 className={style.title}>Start recording time</h1>
+      <h2>{timePassed_min}:{timePassed_sec}</h2>
       <div>
         <Button variant="success" onClick={handleStart}>Start</Button>
         <Button variant="warning" onClick={handleStop}>Stop</Button>
