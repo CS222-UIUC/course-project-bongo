@@ -3,3 +3,12 @@
     color: hsl(217, 55%, 51%);
     font-weight: bold;
 }
+
+.button {
+    padding: .6rem 1.5rem;
+    margin-top: .5rem;
+    margin-right: 2rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: .8rem;
+}
