@@ -31,6 +31,7 @@ export default function Stopwatch({ title, onStop }) {
 
   
   // I committed in ./nextjs instead of root folder, so I had to re-push
+  // I committed in ./nextjs instead of root folder, so I had to re-push
   let timePassed = Math.trunc((time - now) / 1000);
 
   let timePassed_min = Math.trunc(timePassed / 60).toLocaleString('en-US', {
