@@ -1,23 +1,35 @@
 import { useState, useRef } from 'react';
 import style from "./Stopwatch.module.css";
 import Button from 'react-bootstrap/Button';
-export default function Stopwatch(props) {
+
+export default function Stopwatch({ title, onStop }) {
   const [time, setTime] = useState(0);
   const [now, setNow] = useState(0);
+  // added so that the timer doesn't become unstoppable after clicking start twice
+  const [running, setRunning] = useState(false); // Add running state
   
   const intervalRef = useRef(0);
 
   const handleStart = () => {
-    setTime(Date.now());
-    setNow(Date.now());
-    intervalRef.current = setInterval(() => {
+    if (!running) { // Check if the timer is not running
       setTime(Date.now());
-    }, 10);
+      setNow(Date.now());
+      setRunning(true); // Set running state to true
+      // stores the repeated interval reference/ID
+      intervalRef.current = setInterval(() => {
+        setTime(Date.now());
+      }, 10);
+    }
   };
   
   const handleStop = () => {
+    // clears the repeated interval reference/ID
     clearInterval(intervalRef.current);
+    setRunning(false); // Set running state to false
+    onStop(timePassed); // Call the onStop callback with the time passed
   };
+
+  
 
   let timePassed = Math.trunc((time - now) / 1000);
 
@@ -33,12 +45,17 @@ export default function Stopwatch(props) {
 
   return (
     <div className='Stopwatch'>
-      <h1 className={style.title}>Start recording time</h1>
+      <h1 className={style.title}>{title}</h1>
       <h2>{timePassed_min}:{timePassed_sec}</h2>
       <div>
         <Button variant="success" onClick={handleStart}>Start</Button>
         <Button variant="warning" onClick={handleStop}>Stop</Button>
       </div>
+    
+      
+    
+    
     </div>
+    
   )
 }

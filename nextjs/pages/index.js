@@ -1,17 +1,33 @@
+import { useState } from 'react';
 import Link from 'next/link';
 import MainNavigation from '@components/layout/MainNavigation'
 import Stopwatch from '@components/Stopwatch'
+import BarChart from '@components/BarChart';
+
 
 export default function App() {
+  const [times, setTimes] = useState([0, 0, 0]);
+
+  const handleStop = (index) => (timePassed) => {
+    setTimes((prevTimes) => {
+      const updatedTimes = [...prevTimes];
+      updatedTimes[index] = timePassed;
+      return updatedTimes;
+    });
+  };
+
   return (
     <div>
-      <Stopwatch />
+      <Stopwatch title={'schoolwork'} onStop={handleStop(0)} />
+      <Stopwatch title={'housework'} onStop={handleStop(1)} />
+      <Stopwatch title={'schoolwork'} onStop={handleStop(2)} />
 
-      
-
-
+      <div className="mt-5">
+        <h3>Time Summary</h3>
+        <BarChart data={times} />
+      </div>
     </div>
-  )
+  );
 }
 
 
