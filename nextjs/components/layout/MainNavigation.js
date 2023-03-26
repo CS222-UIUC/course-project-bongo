@@ -19,6 +19,9 @@ export default function MainNavigation(props) {
         <li>
           <Link href='/CS-222'>CS 222</Link>
         </li>
+        <li>
+          <Link href='/login'>Login</Link>
+        </li>
       </ul>
     </nav>
   </header>
