@@ -1,71 +1,66 @@
 import { useState } from 'react';
-import Link from 'next/link';
-import MainNavigation from '@components/layout/MainNavigation'
-import Stopwatch from '@components/Stopwatch'
 import BarChart from '@components/BarChart';
-
+import Stopwatch from '@components/Stopwatch';
 
 export default function App() {
-  const [times, setTimes] = useState([0, 0, 0]);
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = () => {
+    setTasks((prevTasks) => [
+      ...prevTasks,
+      { title: `Task ${prevTasks.length + 1}`, time: 0 },
+    ]);
+  };
+
+  const deleteTask = (index) => () => {
+    setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
+  };
 
   const handleStop = (index) => (timePassed) => {
-    setTimes((prevTimes) => {
-      const updatedTimes = [...prevTimes];
-      updatedTimes[index] = timePassed;
-      return updatedTimes;
+    setTasks((prevTasks) => {
+      const updatedTasks = [...prevTasks];
+      updatedTasks[index].time = timePassed;
+      return updatedTasks;
+    });
+  };
+
+  const handleTitleChange = (index) => (newTitle) => {
+    setTasks((prevTasks) => {
+      const updatedTasks = [...prevTasks];
+      updatedTasks[index].title = newTitle;
+      return updatedTasks;
     });
   };
 
   return (
-    <div>
-      <Stopwatch title={'schoolwork'} onStop={handleStop(0)} />
-      <Stopwatch title={'housework'} onStop={handleStop(1)} />
-      <Stopwatch title={'schoolwork'} onStop={handleStop(2)} />
-
+    <div className="container mt-5">
+      <div className="row">
+        {tasks.map((task, index) => (
+          <div key={index} className="col-md-4 mb-4">
+            <Stopwatch
+              title={task.title}
+              onStop={handleStop(index)}
+              onDelete={deleteTask(index)}
+              onTitleChange={handleTitleChange(index)}
+            />
+          </div>
+        ))}
+        <div className="col-12">
+          <button className="btn btn-purple mb-5" onClick={addTask}>
+            Add Task
+          </button>
+        </div>
+      </div>
       <div className="mt-5">
         <h3>Time Summary</h3>
-        <BarChart data={times} />
+        <BarChart
+          data={tasks.map((task) => task.time)}
+          labels={tasks.map((task) => task.title)}
+        />
       </div>
     </div>
   );
+
+
+  
 }
-
-
-
-// export default function App() {
-//   return (
-//     <div className="container p-3 vh-100">
-//       <button className="btn btn-primary m-3">Sling Academy</button>
-//       <button className="btn btn-warning m-3">Hello</button>
-
-//       <div className="dropdown m-3">
-//         <button
-//           className="btn btn-secondary dropdown-toggle"
-//           type="button"
-//           data-bs-toggle="dropdown"
-//           id="dropdownMenuButton1"
-//           aria-expanded="false"
-//         >
-//           Dropdown button
-//         </button>
-//         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-//           <li>
-//             <a className="dropdown-item" href="#">
-//               Option 1
-//             </a>
-//           </li>
-//           <li>
-//             <a className="dropdown-item" href="#">
-//               Option 2
-//             </a>
-//           </li>
-//           <li>
-//             <a className="dropdown-item" href="#">
-//               Option 3
-//             </a>
-//           </li>
-//         </ul>
-//       </div>
-//     </div>
-//   );
-// }
