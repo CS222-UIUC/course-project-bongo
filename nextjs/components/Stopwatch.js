@@ -1,62 +1,73 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import style from "./Stopwatch.module.css";
-import Button from 'react-bootstrap/Button';
+import { Card, Button } from 'react-bootstrap';
 
-export default function Stopwatch({ title, onStop }) {
-  const [time, setTime] = useState(0);
-  const [now, setNow] = useState(0);
-  // added so that the timer doesn't become unstoppable after clicking start twice
-  const [running, setRunning] = useState(false); // Add running state
-  
+export default function Stopwatch({ title, onStop, onDelete, onTitleChange }) {
+  const [timerStart, setTimerStart] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [running, setRunning] = useState(false);
+
   const intervalRef = useRef(0);
 
+  useEffect(() => {
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, []);
+
   const handleStart = () => {
-    if (!running) { // Check if the timer is not running
-      setTime(Date.now());
-      setNow(Date.now());
-      setRunning(true); // Set running state to true
-      // stores the repeated interval reference/ID
+    if (!running) {
+      setTimerStart(Date.now());
+      setCurrentTime(Date.now());
+      setRunning(true);
       intervalRef.current = setInterval(() => {
-        setTime(Date.now());
+        setCurrentTime(Date.now());
       }, 10);
     }
   };
-  
+
   const handleStop = () => {
-    // clears the repeated interval reference/ID
     clearInterval(intervalRef.current);
-    setRunning(false); // Set running state to false
-    onStop(timePassed); // Call the onStop callback with the time passed
+    setRunning(false);
+    onStop(timePassed);
   };
 
-  
-  // I committed in ./nextjs instead of root folder, so I had to re-push
-  // I committed in ./nextjs instead of root folder, so I had to re-push
-  let timePassed = Math.trunc((time - now) / 1000);
+  let timePassed = Math.trunc((currentTime - timerStart) / 1000);
 
-  let timePassed_min = Math.trunc(timePassed / 60).toLocaleString('en-US', {
-    minimumIntegerDigits: 2,
-    useGrouping: false
-  });
-  
-  let timePassed_sec = (timePassed - 60*timePassed_min).toLocaleString('en-US', {
-    minimumIntegerDigits: 2,
-    useGrouping: false
-  });
+  let timePassed_min = Math.trunc(timePassed / 60).toString().padStart(2, '0');
+  let timePassed_sec = (timePassed % 60).toString().padStart(2, '0');
+
+  const handleTitleChange = (event) => {
+    onTitleChange(event.target.value);
+  };
 
   return (
-    <div className='Stopwatch'>
-      <h1 className={style.title}>{title}</h1>
-      <h2>{timePassed_min}:{timePassed_sec}</h2>
-      <div>
-        <Button variant="success" onClick={handleStart}>Start</Button>
-        <Button variant="warning" onClick={handleStop}>Stop</Button>
-      </div>
-    
-      
-    
-    
-    </div>
-    
-  )
+    <Card className={`${style.stopwatchCard} mb-3`}>
+      <Card.Body>
+        <input
+          className={`${style.title} mb-3`}
+          type="text"
+          value={title}
+          onChange={handleTitleChange}
+        />
+        <h2>{timePassed_min}:{timePassed_sec}</h2>
+        <div>
+          {!running && (
+            <Button variant="success" className="me-2" onClick={handleStart}>
+              Start
+            </Button>
+          )}
+          {running && (
+            <Button variant="warning" className="me-2" onClick={handleStop}>
+              Stop
+            </Button>
+          )}
+          <Button variant="danger" onClick={onDelete}>
+            Delete
+          </Button>
+        </div>
+      </Card.Body>
+    </Card>
+  );
+
 }

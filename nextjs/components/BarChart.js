@@ -1,19 +1,22 @@
-// components/BarChart.js
-
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
-function BarChart({ data }) {
+function BarChart({ data, labels }) {
   const chartRef = useRef(null);
+  const chartInstanceRef = useRef(null);
 
   useEffect(() => {
     if (chartRef && chartRef.current) {
+      if (chartInstanceRef.current) {
+        chartInstanceRef.current.destroy();
+      }
+
       const ctx = chartRef.current.getContext('2d');
 
-      new Chart(ctx, {
+      chartInstanceRef.current = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Schoolwork', 'Housework', 'Schoolwork'],
+          labels,
           datasets: [
             {
               label: 'Duration (seconds)',
@@ -33,7 +36,7 @@ function BarChart({ data }) {
         },
       });
     }
-  }, [chartRef, data]);
+  }, [chartRef, data, labels]);
 
   return <canvas ref={chartRef}></canvas>;
 }
