@@ -14,6 +14,7 @@
     "@types/node": "18.11.18",
     "aws-sdk": "^2.1292.0",
     "bootstrap": "^5.2.3",
+    "chart.js": "^4.2.1",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
     "module-alias": "^2.2.2",
