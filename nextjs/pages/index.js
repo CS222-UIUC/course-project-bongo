@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import BarChart from '@components/BarChart';
 import Stopwatch from '@components/Stopwatch';
+import { Button } from 'react-bootstrap';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
@@ -19,7 +20,7 @@ export default function App() {
   const handleStop = (index) => (timePassed) => {
     setTasks((prevTasks) => {
       const updatedTasks = [...prevTasks];
-      updatedTasks[index].time = timePassed;
+      updatedTasks[index].time = timePassed/60;
       return updatedTasks;
     });
   };
@@ -46,9 +47,9 @@ export default function App() {
           </div>
         ))}
         <div className="col-12">
-          <button className="btn btn-purple mb-5" onClick={addTask}>
+          <Button variant="info" className="btn btn-purple mb-5" onClick={addTask}>
             Add Task
-          </button>
+          </Button>
         </div>
       </div>
       <div className="mt-5">

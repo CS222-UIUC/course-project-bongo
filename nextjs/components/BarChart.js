@@ -19,7 +19,7 @@ function BarChart({ data, labels }) {
           labels,
           datasets: [
             {
-              label: 'Duration (seconds)',
+              label: 'Duration (minutes)',
               data,
               backgroundColor: ['Red', 'Blue', 'Yellow'],
               borderColor: ['Red', 'Blue', 'Yellow'],
@@ -31,6 +31,10 @@ function BarChart({ data, labels }) {
           scales: {
             y: {
               beginAtZero: true,
+              SuggestedMax: 1, // not sure why but it's not working properly
+              ticks: {
+                stepSize: 1
+              }
             },
           },
         },

@@ -1,31 +1,31 @@
 .title {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: bold;
-  width: 100%;
-  border: none;
-  background-color: transparent;
-  color: #6c757d;
-  outline: none;
-  padding: 0;
-  margin: 0;
-  text-align: center;
+display: block;
+font-size: 1.5rem;
+font-weight: bold;
+width: 100%;
+border: none;
+background-color: transparent;
+color: #6c757d;
+outline: none;
+padding: 0;
+margin: 0;
+text-align: center;
 }
 
 .stopwatchCard {
-  background-color: #f3f3f9;
-  border: 1px solid #9a73ef;
-  border-radius: 5px;
+background-color: #f3f3f9;
+border: 1px solid #9a73ef;
+border-radius: 5px;
 }
 
 .btn-purple {
-  background-color: #9a73ef;
-  border-color: #9a73ef;
-  color: #fff;
+background-color: #9a73ef;
+border-color: #9a73ef;
+color: #fff;
 }
 
 .btn-purple:hover {
-  background-color: #7e59d8;
-  border-color: #7e59d8;
-  color: #fff;
+background-color: #7e59d8;
+border-color: #7e59d8;
+color: #fff;
 }
