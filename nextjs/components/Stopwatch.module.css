@@ -12,10 +12,16 @@ margin: 0;
 text-align: center;
 }
 
+.time {
+text-align: center;
+}
+
 .stopwatchCard {
 background-color: #f3f3f9;
 border: 1px solid #9a73ef;
 border-radius: 5px;
+width: 13rem;
+text-align: center;
 }
 
 .btn-purple {
