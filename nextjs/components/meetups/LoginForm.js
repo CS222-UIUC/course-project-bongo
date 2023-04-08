@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import Card from '@components/ui/Card';
 import styles from './LoginForm.module.css';
+import LoginButton from '@components/LoginLogoutButton';
 
 
 export default function LoginForm(props) {
@@ -43,7 +44,7 @@ export default function LoginForm(props) {
         </div>
 
         <div className={styles.actions}>
-          <button>Login</button>
+          <LoginButton form>Login</LoginButton>
         </div>
 
       </form>

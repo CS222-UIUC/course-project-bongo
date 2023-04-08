@@ -1,6 +1,7 @@
 import Welcome from './Welcome'
 import React from 'react'
 
+
 export default class LoginControl extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +29,7 @@ export default class LoginControl extends React.Component {
 
     return (
       <div>
-        <Welcome isLoggedIn={isLoggedIn} />
+        {/* <Welcome isLoggedIn={isLoggedIn} /> */}
         {button}
       </div>
     );
