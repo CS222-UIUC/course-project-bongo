@@ -8,9 +8,9 @@
  * In production, all CSS files will be automatically 
  * concatenated into a single minified .css file.
  */
-import '../styles/globals.css'
+import '../styles/globals.css';
 
-import type { AppProps } from 'next/app' // necessary
+import type { AppProps } from 'next/app'; // necessary
 
 import Head from "next/head";
 import Script from "next/script";
