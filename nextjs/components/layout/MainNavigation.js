@@ -11,13 +11,13 @@ export default function MainNavigation(props) {
           <Link href='/'>Timer</Link>
         </li>
         <li>
-          <Link href='/all-meet-up'>Visualization</Link>
+          <Link href='/about'>About</Link>
         </li>
         <li>
           <Link href='/new-meetup'>Settings</Link>
         </li>
         <li>
-          <Link href='/CS-222'>CS 222</Link>
+          <Link href='/all-meet-up'>Visualization</Link>
         </li>
         <li>
           <Link href='/login'>Login</Link>

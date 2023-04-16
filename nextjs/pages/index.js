@@ -33,6 +33,10 @@ export default function App() {
     });
   };
 
+  const handleSave = () => {
+    setTasks((prevTasks) => []);
+  }
+
   return (
     <div className="container mt-5">
       <div className="row">
@@ -49,6 +53,9 @@ export default function App() {
         <div className="col-12">
           <Button variant="info" className="btn btn-purple mb-5" onClick={addTask}>
             Add Task
+          </Button>
+          <Button variant="secondary" className="btn btn-purple mb-5" style ={{float: 'right'}} onClick={handleSave}>
+            Save
           </Button>
         </div>
       </div>
