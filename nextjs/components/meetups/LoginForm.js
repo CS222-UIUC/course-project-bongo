@@ -7,15 +7,15 @@ import LoginButton from '@components/LoginLogoutButton';
 export default function LoginForm(props) {
   // created reference object of react // use for read only 
   // usually for one time purpose like submitting a form
-  const accountInputRef = useRef();
-  const passwordInputRef = useRef();
+  const accountInput = useRef();
+  const passwordInput = useRef();
 
   // react will auto pass through a event
   function submitHandler(event) {
     event.preventDefault(); // vanilla js, supported by react
 
-    const enteredAccount = accountInputRef.current.value;
-    const enteredPassword = passwordInputRef.current.value;
+    const enteredAccount = accountInput.current.value;
+    const enteredPassword = passwordInput.current.value;
     
     const loginData = {
       account: enteredAccount,
