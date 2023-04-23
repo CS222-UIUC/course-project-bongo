@@ -2,9 +2,11 @@ import { useState } from 'react';
 import BarChart from '@components/BarChart';
 import Stopwatch from '@components/Stopwatch';
 import { Button } from 'react-bootstrap';
+import { Popup } from "../components/Popup";
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
+  const [open, setOpen] = useState([]);
 
   const addTask = () => {
     setTasks((prevTasks) => [
@@ -34,10 +36,16 @@ export default function App() {
   };
 
   const handleSave = () => {
+    setOpen(true);
+  }
+
+  const handleYes = () => {
     setTasks((prevTasks) => []);
+    setOpen(false);
   }
 
   return (
+    <div>{open ? <Popup text="Are you sure you wanna save?" yesPopup={handleYes} noPopup={() => setOpen(false)} /> : 
     <div className="container mt-5">
       <div className="row">
         {tasks.map((task, index) => (
@@ -66,6 +74,8 @@ export default function App() {
           labels={tasks.map((task) => task.title)}
         />
       </div>
+    </div>
+    }
     </div>
   );
 
