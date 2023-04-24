@@ -24,11 +24,7 @@ export default class Clock extends React.Component {
   }
 
   tick() {
-    // INFO about setState():
-    // 1. Don't use this.state.comment = "lul", 
-    //    use this.setState({comment: 'Hello});
-    //    Only init assign in constructor
-    // 
+
     this.setState({
       date: new Date()
     });

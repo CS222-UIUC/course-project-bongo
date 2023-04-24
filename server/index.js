@@ -8,6 +8,7 @@ app.use(bodyParser.json()); /// omg this is the problem
 require('dotenv').config();
 
 
+///// [ cors setup ] /////
 const cors = require('cors'); // Add this line to import the cors package
 
 const corsOptions = {
@@ -23,11 +24,29 @@ app.use(cors(corsOptions));
 const mysql = require('mysql2');
 
 const dbConnection = mysql.createConnection({
-  host: '34.123.216.199',
+  host: '35.194.20.94',
   user: 'root',
   password: 'welcome123',
-  database: 'colleges',
+  database: 'cs222',
 }); 
+
+
+///// [ Passport setup ] /////
+const session = require('express-session');
+const passport = require('passport');
+require('./passportConfig')(passport);
+
+app.use(
+  session({
+    secret: 'your-session-secret',
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 
 // Welcome route
@@ -208,6 +227,38 @@ app.route('/api/schools')
     });
   });
 
+
+
+  app.post('/register', async (req, res) => {
+    // Register a new user.
+    // Hash the password using bcrypt and store the user in the MySQL database.
+  });
+  
+  app.post('/login', passport.authenticate('local'), (req, res) => {
+    res.send('Logged in');
+  });
+  
+  app.get('/logout', (req, res) => {
+    req.logout();
+    res.send('Logged out');
+  });
+  
+  app.post('/tasks', async (req, res) => {
+    // Add a new task to the MySQL database for the logged-in user.
+  });
+  
+  app.get('/tasks', async (req, res) => {
+    // Fetch all tasks for the logged-in user from the MySQL database.
+  });
+  
+  app.put('/tasks/:id', async (req, res) => {
+    // Update a task in the MySQL database for the logged-in user.
+  });
+  
+  app.delete('/tasks/:id', async (req, res) => {
+    // Delete a task from the MySQL database for the logged-in user.
+  });
+  
 
 // Start the server
 app.listen(PORT, () => {
