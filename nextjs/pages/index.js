@@ -6,7 +6,7 @@ import { Popup } from "../components/Popup";
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
-  const [open, setOpen] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const addTask = () => {
     setTasks((prevTasks) => [
