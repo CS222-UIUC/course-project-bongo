@@ -18,6 +18,11 @@ import Script from "next/script";
 import MainNavigation from '@components/layout/MainNavigation'
 import Layout from '@components/layout/Layout'
 
+
+import { useState } from 'react';
+
+import UserContext from '../contexts/UserContext';
+
 // add bootstrap css 
 // import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -27,7 +32,8 @@ import Layout from '@components/layout/Layout'
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  
+  const [user, setUser] = useState(null);
+
   return (
     <div>
       {/* for custom imports and the remaining of bootstrap */}
@@ -42,11 +48,14 @@ export default function App({ Component, pageProps }: AppProps) {
       />
 
 
-
+    <UserContext.Provider value={{ user, setUser }}>
       <MainNavigation />
       <Layout>
         <Component {...pageProps} />
       </Layout>
+    </UserContext.Provider>
+
+    
     </div>
   )
 }

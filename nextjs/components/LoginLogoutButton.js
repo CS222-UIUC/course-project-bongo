@@ -1,21 +1,21 @@
-import Welcome from './Welcome'
-import React from 'react'
-
+import React from 'react';
 
 export default class LoginControl extends React.Component {
   constructor(props) {
     super(props);
-    this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.state = {isLoggedIn: false};
+    this.state = { isLoggedIn: false };
   }
 
-  handleLoginClick() {
-    this.setState({isLoggedIn: true});
+  componentDidUpdate(prevProps) {
+    if (this.props.isLoggedIn !== prevProps.isLoggedIn) {
+      this.setState({ isLoggedIn: this.props.isLoggedIn });
+    }
   }
 
   handleLogoutClick() {
-    this.setState({isLoggedIn: false});
+    this.setState({ isLoggedIn: false });
+    this.props.onLogout();
   }
 
   render() {
@@ -24,21 +24,16 @@ export default class LoginControl extends React.Component {
     if (isLoggedIn) {
       button = <LogoutButton onClick={this.handleLogoutClick} />;
     } else {
-      button = <LoginButton onClick={this.handleLoginClick} />;
+      button = <LoginButton form={this.props.form} onClick={this.props.onClick} />;
     }
 
-    return (
-      <div>
-        {/* <Welcome isLoggedIn={isLoggedIn} /> */}
-        {button}
-      </div>
-    );
+    return <div>{button}</div>;
   }
 }
 
 function LoginButton(props) {
   return (
-    <button onClick={props.onClick} className='btn'>
+    <button type={props.form ? 'submit' : 'button'} onClick={props.onClick} className="btn">
       Login
     </button>
   );
@@ -46,7 +41,7 @@ function LoginButton(props) {
 
 function LogoutButton(props) {
   return (
-    <button onClick={props.onClick} className='btn btn--alt'>
+    <button onClick={props.onClick} className="btn btn--alt">
       Logout
     </button>
   );
