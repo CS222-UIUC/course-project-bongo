@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import SignUpForm from '@components/SignUpForm';
 import UserContext from '../contexts/UserContext';
+import { useRouter } from 'next/router';
 
 export default function SignUpPage() {
   const { setUser } = useContext(UserContext);
-
+  const router = useRouter()
   async function addSignUpHandler(signUpData) {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/signup`, {
@@ -18,6 +19,7 @@ export default function SignUpPage() {
       if (response.status === 201) {
         const userData = await response.json();
         setUser({ userId: userData.userId });
+        router.push('/');
       } else {
         alert('Error signing up, please try again!');
       }

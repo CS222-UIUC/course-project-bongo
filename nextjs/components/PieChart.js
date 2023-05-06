@@ -1,9 +1,22 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
-function BarChart({ data, labels }) {
+function PieChart({ data, labels }) {
   const chartRef = useRef(null);
   const chartInstanceRef = useRef(null);
+
+  const colors = [
+    '#90AFC5', // Light Blue
+    '#336B87', // Dark Blue
+    '#A43820', // Red
+    '#AA863A', // Orange
+    '#DFE166', // Yellow
+    '#BFD598', // Green
+    '#9E9D89', // Gray
+    '#8C1A6A', // Purple
+    '#6D8DB5', // Sky Blue
+    '#6E3667', // Magenta
+  ];
 
   useEffect(() => {
     if (chartRef && chartRef.current) {
@@ -13,43 +26,18 @@ function BarChart({ data, labels }) {
 
       const ctx = chartRef.current.getContext('2d');
 
-      const colors = [
-        '#90AFC5', // Light Blue
-        '#336B87', // Dark Blue
-        '#A43820', // Red
-        '#AA863A', // Orange
-        '#DFE166', // Yellow
-        '#BFD598', // Green
-        '#9E9D89', // Gray
-        '#8C1A6A', // Purple
-        '#6D8DB5', // Sky Blue
-        '#6E3667', // Magenta
-      ];
-
       chartInstanceRef.current = new Chart(ctx, {
-        type: 'bar',
+        type: 'pie',
         data: {
           labels,
           datasets: [
             {
-              label: 'Duration (seconds)',
               data,
               backgroundColor: colors,
               borderColor: ["black"],
               borderWidth: 1,
             },
           ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-              SuggestedMax: 1, // not sure why but it's not working properly
-              ticks: {
-                stepSize: 1
-              }
-            },
-          },
         },
       });
     }
@@ -58,4 +46,4 @@ function BarChart({ data, labels }) {
   return <canvas ref={chartRef}></canvas>;
 }
 
-export default BarChart;
+export default PieChart;

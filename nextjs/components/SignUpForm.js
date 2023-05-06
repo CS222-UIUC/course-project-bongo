@@ -17,7 +17,7 @@ export default function SignupForm(props) {
       password: enteredPassword,
     };
 
-    props.onSignup(signupData);
+    props.onSignUp(signupData);
   }
 
   return (

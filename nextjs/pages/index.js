@@ -4,6 +4,8 @@ import Stopwatch from '@components/Stopwatch';
 import { Button } from 'react-bootstrap';
 import UserContext from '../contexts/UserContext';
 import Logos from '@components/Logos';
+import PieChart from '@components/PieChart';
+
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
@@ -143,11 +145,22 @@ return (
     <Logos />
     <div className="mt-5">
       <h3>Total Time Spent</h3>
-      <BarChart
-        key={tasks.length} // Add this line
-        data={Array.isArray(tasks) ? tasks.map((task) => task.time_milliseconds / 1000) : []}
-        labels={Array.isArray(tasks) ? tasks.map((task) => task.title) : []}
-      />
+      <div className="row">
+        <div className="col-md-6">
+          <BarChart
+            key={tasks.length}
+            data={Array.isArray(tasks) ? tasks.map((task) => task.time_milliseconds / 1000) : []}
+            labels={Array.isArray(tasks) ? tasks.map((task) => task.title) : []}
+          />
+        </div>
+        <div className="col-md-6">
+          <PieChart
+            data={Array.isArray(tasks) ? tasks.map((task) => task.time_milliseconds / 1000) : []}
+            labels={Array.isArray(tasks) ? tasks.map((task) => task.title) : []}
+          />
+        </div>
+      </div>
+      
     </div>
     <div className="col-12">
       <Button variant="info" className="btn btn-purple mb-5" onClick={addTask}>
