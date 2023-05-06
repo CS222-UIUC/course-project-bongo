@@ -1,11 +1,11 @@
 # course-project-bongo
+![Application Overview](nextjs/public/images/frontend.png)
 
 ## What is "Liquid Productivity"?
 
 It is a productivity time management platform that allows you to track the time you spent on various tasks, productive or not productive. Then after completing each task, the website will show the user exactly a bar-chart of how the user spent their time over their entire usage of this platform. Users can sign up for an account, then login and logout of their account. They can add, update, and delete tasks as well. 
 
 ## Technical Architecture
-![Application Overview](nextjs/public/images/frontend.png)
 ![Software Architecture](nextjs/public/images/architecture.png)
 
 Frontend: react.js + next.js (framework) + jest.js (testing) \
