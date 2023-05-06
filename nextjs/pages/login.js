@@ -4,6 +4,7 @@ import LoginForm from '@components/LoginForm';
 import LoginControl from '@components/LoginLogoutButton';
 import { useContext } from 'react';
 import UserContext from '../contexts/UserContext';
+import styles from './login.module.css';
 
 export default function LoginPage() {
   const { setUser } = useContext(UserContext);
@@ -32,6 +33,29 @@ export default function LoginPage() {
       }
     } catch (error) {
       console.error('Error while logging in:', error);
+    }
+  }
+
+  async function addSignupHandler(signupData) {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/register`, {
+        method: 'POST',
+        body: JSON.stringify(signupData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status === 201) {
+        const userData = await response.json();
+        alert('User registered successfully! Please log in.');
+      } else if (response.status === 409) {
+        alert('Email already exists, please try another one!');
+      } else {
+        alert('Error during registration, please try again!');
+      }
+    } catch (error) {
+      console.error('Error while registering:', error);
     }
   }
   
@@ -68,7 +92,15 @@ export default function LoginPage() {
         }
         } />
       ) : (
-        <LoginForm onLogin={addLoginHandler} />
+        <>
+          <LoginForm onLogin={addLoginHandler} />
+
+            <p className={styles.centerText}>
+              Don't have an account? Register <a href="/signup">here</a>
+            </p>
+
+        </>
+        
       )}
     </div>
   );

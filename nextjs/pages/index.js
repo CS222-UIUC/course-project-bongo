@@ -48,7 +48,7 @@ const addTask = async () => {
   const newTask = { 
     user_id: user.userId,
     title: `Task ${tasks.length + 1}`, 
-    time_minutes: 0,
+    time_milliseconds: 0,
     created_at: new Date().toISOString(),
    };
   try {
@@ -74,7 +74,11 @@ const deleteTask = (taskId) => async () => {
     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${taskId}`, {
       method: 'DELETE',
     });
+    console.log("taskId: ", taskId);
+    console.log("tasks: ", tasks.id);
+
     setTasks((prevTasks) => prevTasks.filter(task => task.id !== taskId));
+
   } catch (error) {
     console.error('Error deleting task:', error);
   }
@@ -86,12 +90,14 @@ const handleStop = (taskId) => async (timePassed) => {
   console.log(tasks);
   const taskIndex = tasks.findIndex(task => task.id === taskId);
   
-  const timeMinutes = timePassed;
+  const timeMilliseconds = timePassed; // Convert seconds to milliseconds
+
+
   try {
     // update task in database
     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${taskId}`, {
       method: 'PUT',
-      body: JSON.stringify({ title: tasks[taskIndex].title, time_minutes: timeMinutes }),
+      body: JSON.stringify({ title: tasks[taskIndex].title, time_milliseconds: timeMilliseconds }), // Change this to time_milliseconds
       headers: {
         'Content-Type': 'application/json',
       },
@@ -99,7 +105,7 @@ const handleStop = (taskId) => async (timePassed) => {
     setTasks((prevTasks) => {
       const updatedTasks = [...prevTasks];
       const taskIndex = updatedTasks.findIndex((task) => task.id === taskId);
-      updatedTasks[taskIndex].time_minutes = timeMinutes;
+      updatedTasks[taskIndex].time_milliseconds = timeMilliseconds; // Change this to time_milliseconds
       return updatedTasks;
     });
   } catch (error) {
@@ -110,12 +116,12 @@ const handleStop = (taskId) => async (timePassed) => {
 
 const handleTitleChange = (taskId) => async (newTitle) => {
   const taskIndex = tasks.findIndex((task) => task.id === taskId);
-  const currentTimeMinutes = tasks[taskIndex].time_minutes;
+  const currentTimeMilliseconds = tasks[taskIndex].time_milliseconds; // Change this to time_milliseconds
 
   try {
     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${taskId}`, {
       method: 'PUT',
-      body: JSON.stringify({ title: newTitle, time_minutes: currentTimeMinutes }),
+      body: JSON.stringify({ title: newTitle, time_milliseconds: currentTimeMilliseconds }), // Change this to time_milliseconds
       headers: {
         'Content-Type': 'application/json',
       },
@@ -134,36 +140,37 @@ const handleTitleChange = (taskId) => async (newTitle) => {
 
 return (
   <div className="container mt-5">
-    <Logos/>
+    <Logos />
     <div className="mt-5">
       <h3>Total Time Spent</h3>
       <BarChart
-        data={Array.isArray(tasks) ? tasks.map((task) => task.time_minutes) : []}
+        key={tasks.length} // Add this line
+        data={Array.isArray(tasks) ? tasks.map((task) => task.time_milliseconds / 1000) : []}
         labels={Array.isArray(tasks) ? tasks.map((task) => task.title) : []}
       />
+    </div>
+    <div className="col-12">
+      <Button variant="info" className="btn btn-purple mb-5" onClick={addTask}>
+        Add Task
+      </Button>
     </div>
     <div className="row">
       {Array.isArray(tasks) &&
         tasks.map((task, index) => (
-          <div key={index} className="col-md-4 mb-4">
+          <div key={task.id} className="col-md-4 mb-4">
             <Stopwatch
               title={task.title}
               onStop={handleStop(task.id)}
               onDelete={deleteTask(task.id)}
               onTitleChange={handleTitleChange(task.id)}
-              startTime={task.time_minutes * 60}
-
+              startTime={task.time_milliseconds} // Change this to time_milliseconds
             />
           </div>
         ))}
-      <div className="col-12">
-        <Button variant="info" className="btn btn-purple mb-5" onClick={addTask}>
-          Add Task
-        </Button>
-      </div>
     </div>
   </div>
 );
+
 
 
 

@@ -19,7 +19,7 @@ function BarChart({ data, labels }) {
           labels,
           datasets: [
             {
-              label: 'Duration (minutes)',
+              label: 'Duration (seconds)',
               data,
               backgroundColor: ['Red', 'Blue', 'Yellow'],
               borderColor: ['Red', 'Blue', 'Yellow'],

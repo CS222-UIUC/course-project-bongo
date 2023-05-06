@@ -4,7 +4,8 @@ import { Card, Button } from 'react-bootstrap';
 
 
 export default function Stopwatch({ title, onStop, onDelete, onTitleChange, startTime }) {
-  const [time, setTime] = useState(startTime || 0);
+  const [time, setTime] = useState((startTime) || 0);
+
   const [isActive, setIsActive] = useState(false);
   
 
@@ -12,7 +13,7 @@ export default function Stopwatch({ title, onStop, onDelete, onTitleChange, star
     let interval = null;
     if (isActive) {
       interval = setInterval(() => {
-        setTime(time => time + 1);
+        setTime(time => time + 1000); // Increment by 1000 to account for milliseconds
       }, 1000);
     } else {
       clearInterval(interval);
@@ -22,11 +23,9 @@ export default function Stopwatch({ title, onStop, onDelete, onTitleChange, star
 
   const handleStartPause = () => {
     if (isActive) {
-      onStop(timePassed);
+      onStop(time); // Pass time in milliseconds
     } else {
-      // subtract startTime from timePassed when starting the stopwatch
-      const startTimeInSeconds = startTime / 1000;
-      timePassed -= startTimeInSeconds;
+      const startTimeInMilliseconds = startTime;
     }
     setIsActive(!isActive);
   };
@@ -34,17 +33,17 @@ export default function Stopwatch({ title, onStop, onDelete, onTitleChange, star
 
   let timePassed = time;
 
-  let timePassed_min = Math.trunc(time / 60).toLocaleString('en-US', {
+  let timePassed_min = Math.trunc(time / 60000).toLocaleString('en-US', { // Convert to minutes
     minimumIntegerDigits: 2,
     useGrouping: false
   });
   
-  let timePassed_sec = (time % 60).toLocaleString('en-US', { // convert to seconds
+  let timePassed_sec = Math.trunc((time % 60000) / 1000).toLocaleString('en-US', { // Convert to seconds
     minimumIntegerDigits: 2,
     useGrouping: false
   });
 
-    const handleTitleChange = (event) => {
+  const handleTitleChange = (event) => {
     onTitleChange(event.target.value);
   };
 

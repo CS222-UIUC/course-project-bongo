@@ -58,6 +58,27 @@ app.post('/api/logout', (req, res) => {
 });
 
 
+app.post('/api/register', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const existingUser = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+
+    if (existingUser.rowCount > 0) {
+      res.status(409).json({ message: 'Email already exists' });
+      return;
+    }
+
+    const result = await pool.query('INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *', [email, password]);
+    const user = result.rows[0];
+
+    res.status(201).json({ message: 'User registered successfully', userId: user.id });
+  } catch (error) {
+    console.error('Error querying the database:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 // fetch tasks
 app.get('/api/tasks/:userId', async (req, res) => {
@@ -75,11 +96,11 @@ app.get('/api/tasks/:userId', async (req, res) => {
 // add task
 app.post('/api/tasks/:userId', async (req, res) => {
   const { userId } = req.params;
-  const { title, time_minutes, created_at } = req.body;
+  const { title, time_milliseconds, created_at } = req.body;
   console.log("adding task, with userId: ", userId);
 
   try {
-    const result = await pool.query('INSERT INTO user_tasks (user_id, title, time_minutes, created_at) VALUES ($1, $2, $3, $4) RETURNING *', [userId, title, time_minutes, created_at]);
+    const result = await pool.query('INSERT INTO user_tasks (user_id, title, time_milliseconds, created_at) VALUES ($1, $2, $3, $4) RETURNING *', [userId, title, time_milliseconds, created_at]);
     console.log("backend init task: ", result);
     res.status(201).json(result.rows[0]);
   } catch (error) {
@@ -93,10 +114,10 @@ app.post('/api/tasks/:userId', async (req, res) => {
 // update task on pause
 app.put('/api/tasks/:taskId', async (req, res) => {
   const { taskId } = req.params;
-  const { title, time_minutes } = req.body;
+  const { title, time_milliseconds } = req.body;
 
   try {
-    await pool.query('UPDATE user_tasks SET title = $1, time_minutes = $2 WHERE id = $3', [title, time_minutes, taskId]);
+    await pool.query('UPDATE user_tasks SET title = $1, time_milliseconds = $2 WHERE id = $3', [title, time_milliseconds, taskId]);
     res.status(200).json({ message: 'Task updated successfully' });
   } catch (error) {
     console.error('Error querying the database:', error);

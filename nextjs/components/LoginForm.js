@@ -23,19 +23,19 @@ export default function LoginForm(props) {
   return (
     <Card>
       <form className={styles.form} onSubmit={submitHandler}>
-        <div className={styles.control}>
-          <label htmlFor="email">Email</label>
-          <input type="text" required id="email" ref={emailInputRef} />
-        </div>
+          <div className={styles.control}>
+            <label htmlFor="email">Email</label>
+            <input type="text" required id="email" ref={emailInputRef} />
+          </div>
 
-        <div className={styles.control}>
-          <label htmlFor="password">Password</label>
-          <input type="password" required id="password" ref={passwordInputRef} />
-        </div>
+          <div className={styles.control}>
+            <label htmlFor="password">Password</label>
+            <input type="password" required id="password" ref={passwordInputRef} />
+          </div>
 
-        <div className={styles.actions}>
-          <button>Login</button>
-        </div>
+          <div className={styles.actions}>
+            <button>Login</button>
+          </div>
       </form>
     </Card>
   );
