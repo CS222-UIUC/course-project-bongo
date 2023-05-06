@@ -1,4 +1,4 @@
-# course-project-bongo
+# Liquid Productivity
 ![Application Overview](nextjs/public/images/frontend.png)
 
 ## What is "Liquid Productivity"?
