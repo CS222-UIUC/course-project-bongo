@@ -10,7 +10,7 @@ It is a productivity time management platform that allows you to track the time 
 
 Frontend: react.js + next.js (framework) + jest.js (testing) \
 Backend: node.js + express.js \
-Database: Google Cloud Platform + PostgreSQL \
+Database: Google Cloud Platform + PostgreSQL 
 
 Frontend sends user and task info to Backend. \
 Backend sends frontend's request to Database. \
