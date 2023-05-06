@@ -5,8 +5,8 @@
 It is a productivity time management platform that allows you to track the time you spent on various tasks, productive or not productive. Then after completing each task, the website will show the user exactly a bar-chart of how the user spent their time over their entire usage of this platform. Users can sign up for an account, then login and logout of their account. They can add, update, and delete tasks as well. 
 
 ## Technical Architecture
-![[nextjs/public/images/frontend.png]]
-![[nextjs/public/images/architecture.png]]
+![Application Overview](nextjs/public/images/frontend.png)
+![Software Architecture](nextjs/public/images/architecture.png)
 
 Frontend: react.js + next.js (framework) + jest.js (testing) \
 Backend: node.js + express.js \
@@ -25,8 +25,8 @@ Jeff Fan (hfan12) Role: Backend \
 Zhaoqi Xia (zhaoqix2) Role: Database 
 
 # How to run:
-1. (to git clone)
-`git clone https://github.com/CS222-UIUC/course-project-bongo.git` \
+1. (to git clone) \
+`git clone https://github.com/CS222-UIUC/course-project-bongo.git` 
 
 1. (if you're just trying to update) switch to your branch and fetch+merge \
 `git checkout [your_branch]` \
@@ -36,15 +36,15 @@ Zhaoqi Xia (zhaoqix2) Role: Database
 2. frontend install + run \
 `cd nextjs` \
 `npm i` \
-`nodemon` 
+`npx next dev`
 
 3. server install + run \
 `cd server` \
 `npm i` \
-`npx next dev` \
+`nodemon` \
 then open the corresponding localhost specified 
 
-4. how to push (create pr review) \
+1. how to push (create pr review) \
 `git add .` \
 `git commit -m"your commit message"` \
 `git push` // push to your own remote branch \
